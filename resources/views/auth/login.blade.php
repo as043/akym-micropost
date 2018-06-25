@@ -1,4 +1,4 @@
-@extend('layouts.app')
+@extends('layouts.app')
 
 @section('content')
     <div class="text-center">
@@ -17,14 +17,9 @@
                 {!! Form::label('password','Password') !!}
                 {!! Form::password('password',['class' => 'form-control']) !!}
             </div>
-            
-            {!! Form::label('password','Password') !!}
-            {!! Form::password('password',['class' => 'form-control']) !!}
-            
-        </div>
-        
-        {!! Form::submit('Log in',['class' => 'btn btn-primary btn-block']) !!}
-        {!! Form::close() !!}
+
+            {!! Form::submit('Log in', ['class' => 'btn btn-primary btn-block']) !!}
+            {!! Form::close() !!}
         
         <p>New user? {!! link_to_route('signup.get','Sign up now!') !!}</p>
     </div>

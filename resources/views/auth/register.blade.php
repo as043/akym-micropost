@@ -1,4 +1,4 @@
-@extends('layouts.app)
+@extends('layouts.app')
 
 @section('content')
     <dev class="text-center">

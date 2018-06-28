@@ -36,13 +36,13 @@ class UsersController extends Controller
     public function followings($id)
     {
         $user = User::find($id);
-        $following = $user->followings()->paginate(10);
+        $followings = $user->followings()->paginate(10);
         
         $date = [
             'user' => $user,
             'users' => $followings,
             ];
-            $date += $this->count($user);
+            $date += $this->counts($user);
             
             return view('users.followings',$date);
     }

@@ -18,7 +18,7 @@ class MicropostsController extends Controller
         $date = [];
         if (\Auth::check()){
             $user = \Auth::user();
-            $microposts = $user->microposts()->orderBy('created_at','desc')->paginate(10);
+            $microposts = $user->feed_microposts()->orderBy('created_at','desc')->paginate(10);
             
             $date = [
                 'user' => $user,

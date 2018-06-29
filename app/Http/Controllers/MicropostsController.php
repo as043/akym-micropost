@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Controllers\Controller;
+use App\User;
 
 class MicropostsController extends Controller
 {
@@ -51,5 +51,22 @@ class MicropostsController extends Controller
          }
          return redirect()->back();
      }
+     
+
+     
+     public function favoritings($id)
+     {
+        $user = User::find($id);
+        $favoritings = $user->favoritings()->paginate(10);
+
+        $data = [
+            'user' => $user,
+            'microposts' => $favoritings,
+        ];
+
+        $data += $this->counts($microposts);
+
+        return view('favorite.favorite', $data);
+    }
 }
 

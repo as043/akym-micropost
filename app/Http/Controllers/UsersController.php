@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\User; // 追加
 use App\Micropost; //追加
+use App\favorite;
 use Log;
 
 class UsersController extends Controller
@@ -74,28 +75,12 @@ class UsersController extends Controller
 
         $data = [
             'user' => $user,
-            'microposts' => $favoritings,
-        ];
-
-        $data += $this->counts($user);
-        
-
-
-        return view('favorite.favoritings', $data);
-    }
-    
-    public function favorites($id)
-     {
-        $user = User::find($id);
-        $favorites = $user->favorites()->paginate(10);
-        
-        $data = [
-            'user' => $user,
-            'microposts' => $favorites,
+            'microposts_id' => $favoritings,
         ];
 
         $data += $this->counts($user);
 
         return view('favorite.favoritings', $data);
     }
+
 }

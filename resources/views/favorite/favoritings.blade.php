@@ -18,11 +18,17 @@
                 <li role="presentation" class="{{ Request::is('users/' . $user->id) ? 'active' : '' }}"><a href="{{ route('users.show', ['id' => $user->id]) }}">TimeLine <span class="badge">{{ $count_microposts }}</span></a></li>
                 <li role="presentation" class="{{ Request::is('users/*/followings') ? 'active' : '' }}"><a href="{{ route('users.followings', ['id' => $user->id]) }}">Followings <span class="badge">{{ $count_followings }}</span></a></li>
                 <li role="presentation" class="{{ Request::is('users/*/followers') ? 'active' : '' }}"><a href="{{ route('users.followers', ['id' => $user->id]) }}">Followers <span class="badge">{{ $count_followers }}</span></a></li>
-                <li role="presentation" class="{{ Request::is('microposts/*/favoritings') ? 'active' : '' }}"><a href="{{ route('microposts.favoritings', ['id' => $user->id]) }}">Favorite <span class="badge">{{ $count_favorites }}</span></a></li>
+                <li role="presentation" class="{{ Request::is('microposts/*/favoritings') ? 'active' : '' }}"><a href="{{ route('microposts.favoritings', ['id' => $user->id]) }}">Favorite <span class="badge">{{ $count_favoritings }}</span></a></li>
             </ul>
-            @if ($count_favorites > 0)
-                    @include('microposts.microposts', ['microposts' => $microposts])
-                @endif
+            @if ($count_favoritings > 0)
+                    @include('microposts.microposts', ['microposts' => $microposts_id])
+            @else
+            <div class="center jumbotron">
+            <div class="text-center">
+                <h1>Find Favorite Microposts</h1>
+            </div>
+            </div>
+            @endif
         </div>
     </div>
 @endsection

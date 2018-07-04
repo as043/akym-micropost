@@ -42,3 +42,4 @@ Route::group(['middleware' => 'auth'], function () {
     
 
     Route::resource('microposts', 'MicropostsController', ['only' => ['store', 'destroy']]);
+    Route::resource('favorite', 'FavoriteController', ['only' => ['store', 'destroy']]);

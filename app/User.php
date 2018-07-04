@@ -65,7 +65,6 @@ class User extends Authenticatable
     public function unfollow($userId)
     {
         $exist = $this->is_following($userId);
-        
         $its_me = $this->id == $userId;
         
         if ($exist && !$its_me) {
@@ -93,12 +92,12 @@ class User extends Authenticatable
     
     public function favoritings()
     {
-        return $this->belongsToMany(Micropost::class, 'favorite', 'user_id','micropost')->withTimestamps();
+        return $this->belongsToMany(User::class, 'favorite', 'user_id','micropost_id')->withTimestamps();
     }
     
     public function favorites()
     {
-        return $this->belongsToMany(Micropost::class, 'favorite', 'micropost','user_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'favorite', 'micropost_id','user_id')->withTimestamps();
     }
     
     public function favorite($micropostId)
@@ -111,30 +110,27 @@ class User extends Authenticatable
         return false;
     } else {
         // 未ファボであればフォローする
-        $this->favorites()->attach($micropostId);
+        $this->favoritings()->attach($micropostId);
         return true;
     }
     }
     
-   public function unfavorite($micropostId)
-   {
-    // 既にファボしているかの確認
-    $exist = $this->is_favoriting($micropostId);
-
-    if ($exist) {
-        // 既にファボしていればフォローを外す
-        $this->favoritings()->detach($micropostId);
-        return true;
-    } else {
-        // 未ファボであれば何もしない
-        return false;
-    }
+    public function unfavorite($micropostId)
+    {
+        $exist = $this->is_favoriting($micropostId);
+        
+        if ($exist) {
+            $this->favoritings()->detach($micropostId);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function is_favoriting($micropostId) {
-        return $this->favoritings()->where('micropost', $micropostId)->exists();
+        
+        return $this->favoritings()->where('micropost_id', $micropostId)->exists();
     }
-    
 
     }
 

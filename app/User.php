@@ -95,11 +95,6 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'favorite', 'user_id','micropost_id')->withTimestamps();
     }
     
-    public function favorites()
-    {
-        return $this->belongsToMany(User::class, 'favorite', 'micropost_id','user_id')->withTimestamps();
-    }
-    
     public function favorite($micropostId)
     {
     // 既にお気に入りしているかの確認

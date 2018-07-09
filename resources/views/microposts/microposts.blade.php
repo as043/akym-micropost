@@ -16,11 +16,11 @@
                 </div>
                 @if (Auth::user()->is_favoriting($micropost->id))
                     {!! Form::open(['route' => ['micropost.unfavorite', $micropost->id], 'method' => 'delete']) !!}
-                    {!! Form::submit('Unfavorite', ['class' => "btn btn-danger btn-block btn-xs"]) !!}
+                    {!! Form::submit('Unfavorite', ['class' => 'btn btn-info btn-xs']) !!}
                     {!! Form::close() !!}
                 @else
                     {!! Form::open(['route' => ['micropost.favorite', $micropost->id], 'method' => 'store']) !!}
-                    {!! Form::submit('Favorite', ['class' => "btn btn-primary btn-block btn-xs"]) !!}
+                    {!! Form::submit('Favorite', ['class' => 'btn btn-warning btn-xs']) !!}
                     {!! Form::close() !!}
                 @endif
             <div>

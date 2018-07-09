@@ -20,7 +20,6 @@
                     {!! Form::open(['route' => ['microposts.destroy', $micropost->id],'method' => 'delete', 'style' => 'margin-right:10px']) !!}
                         {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) !!}
                     {!! Form::close() !!}
-
                 @endif
                 </div>
                 @if (Auth::user()->is_favoriting($micropost->id))

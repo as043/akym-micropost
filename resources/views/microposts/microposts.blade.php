@@ -15,22 +15,22 @@
                     <o>{!! nl2br(e($micropost->content)) !!}</o>
                 </div>
                 <div style="display: inline-flex;">
-                 <div>
+                @if (Auth::user()->is_favoriting($micropost->id))
+                    {!! Form::open(['route' => ['micropost.unfavorite', $micropost->id], 'method' => 'delete', 'style' => 'margin-right:10px']) !!}
+                    {!! Form::submit('Favorite', ['class' => 'btn btn-success btn-xs']) !!}
+                    {!! Form::close() !!}
+                @else
+                    {!! Form::open(['route' => ['micropost.favorite', $micropost->id], 'method' => 'store', 'style' => 'margin-right:10px']) !!}
+                    {!! Form::submit('Favorite', ['class' => 'btn btn-default btn-xs']) !!}
+                    {!! Form::close() !!}
+                @endif
+                <div>
                 @if (Auth::id() == $micropost->user_id)
                     {!! Form::open(['route' => ['microposts.destroy', $micropost->id],'method' => 'delete', 'style' => 'margin-right:10px']) !!}
                         {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) !!}
                     {!! Form::close() !!}
                 @endif
                 </div>
-                @if (Auth::user()->is_favoriting($micropost->id))
-                    {!! Form::open(['route' => ['micropost.unfavorite', $micropost->id], 'method' => 'delete', 'style' => 'margin-right:10px']) !!}
-                    {!! Form::submit('Unfavorite', ['class' => 'btn btn-info btn-xs']) !!}
-                    {!! Form::close() !!}
-                @else
-                    {!! Form::open(['route' => ['micropost.favorite', $micropost->id], 'method' => 'store', 'style' => 'margin-right:10px']) !!}
-                    {!! Form::submit('Favorite', ['class' => 'btn btn-warning btn-xs']) !!}
-                    {!! Form::close() !!}
-                @endif
             </div>
         </div>
     </li>
